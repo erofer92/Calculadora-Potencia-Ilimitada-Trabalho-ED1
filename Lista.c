@@ -2,157 +2,246 @@
 #include <stdlib.h>
 #include "Lista.h"
 
-#define TAM_MAX 10000
+typedef struct no No;
 
-struct lista {
-	int itens[TAM_MAX];
-	int ini, fim;
+struct lista
+{
+	int tam;
+	No * ini, * fim;
 };
 
-Lista * criar() {
+struct no
+{
+	int info;
+	No * prox;
+};
+
+
+void inverter(Lista *l)
+{
+    int i, tam = tamanho(l);
+    No* aux;
+    No* aux2 = NULL;
+    l->fim = l->ini;
+
+    if(tam = 0)
+        return;
+
+    for(i=0; i<tam-1; i++)
+    {
+        aux = l->ini;
+        l->ini = aux->prox;
+        aux->prox = aux2;
+        aux2 = aux;
+    }
+    l->ini->prox = aux;
+}
+
+
+Lista * criar()
+{
 	Lista * l = (Lista *)malloc(sizeof(Lista));
-	l->ini = 0;
-	l->fim = 0;
+	l->ini = NULL;
+	l->fim = NULL;
+	l->tam = 0;
 	return l;
 }
 
-void destruir(Lista * l) {
+void destruir(Lista * l)
+{
 	if (l != NULL) {
+		limpar(l);
 		free(l);
 	}
 }
 
-void limpar(Lista * l) {
-	l->ini = l->fim = 0;
+void limpar(Lista * l)
+{
+	No * aux = l->ini;
+	while (aux != NULL)
+    {
+		No * aux2 = aux;
+		aux = aux->prox;
+		free(aux2);
+	}
+	l->ini = NULL;
+	l->fim = NULL;
+	l->tam = 0;
 }
 
-void imprimir(Lista * l) {
-	int i;
+void imprimir(Lista * l)
+{
+	No * aux = l->ini;
 	printf("[ ");
-	for(i=l->ini; i<l->fim; i++) {
-		printf("%d ",l->itens[i]);
+	while (aux != NULL)
+    {
+		printf("%d ", aux->info);
+		aux = aux->prox;
 	}
 	printf("]\n");
 }
 
-int tamanho(Lista * l) {
-	return l->fim - l->ini;
+int tamanho(Lista * l)
+{
+	return l->tam;
 }
 
-int esta_vazia(Lista * l) {
+int esta_vazia(Lista * l)
+{
 	return tamanho(l) == 0;
 }
 
-int ler_pos(Lista * l, int p) {
-	if (p < 0 || p >= tamanho(l)) {
+int ler_pos(Lista * l, int p)
+{
+	int i;
+	No * aux = l->ini;
+	if (p < 0 || p >= tamanho(l))
+    {
 		printf("Posicao invalida!\n");
 		return -1;
 	}
-	return l->itens[l->ini+p];
+	for (i=0; i<p; i++)
+		aux = aux->prox;
+
+	return aux->info;
 }
 
-int primeiro(Lista * l) {
+int primeiro(Lista * l)
+{
 	return ler_pos(l, 0);
 }
 
-int ultimo(Lista * l) {
+int ultimo(Lista * l)
+{
 	return ler_pos(l, tamanho(l)-1);
 }
 
-int buscar(Lista * l, int v) {
-	int i;
-	for (i=l->ini; i<l->fim; i++) {
-		if (l->itens[i] == v) {
-			return i - l->ini;
+int buscar(Lista * l, int v)
+{
+	int p = 0;
+	No * aux = l->ini;
+/*
+	for (i=0; i<tamanho(l); i++) {
+		if (ler_pos(l,i) == v) {
+			return i;
 		}
 	}
-	return -1;
+*/
+	while (aux != NULL && aux->info != v)
+    {
+		aux = aux->prox;
+		p++;
+	}
+
+	return aux != NULL ? p : -1;
 }
 
-void escrever_pos(Lista * l, int p, int v) {
-	if (p < 0 || p >= tamanho(l)) {
+void escrever_pos(Lista * l, int p, int v)
+{
+	int i;
+	No * aux = l->ini;
+	if (p < 0 || p >= tamanho(l))
+    {
 		printf("Posicao invalida!\n");
 		return;
 	}
-	l->itens[l->ini+p] = v;
+	for (i=0; i<p; i++)
+		aux = aux->prox;
+
+	aux->info = v;
 }
 
-void inserir_pos(Lista * l, int p, int v) {
+void inserir_pos(Lista * l, int p, int v)
+{
 	int i;
-	if (p < 0 || p > tamanho(l)) {
+	No * aux = l->ini, * aux2;
+
+	if (p < 0 || p > tamanho(l))
+    {
 		printf("Posicao invalida!\n");
 		return;
 	}
-	if (tamanho(l) == TAM_MAX) {
-		printf("Lista cheia!\n");
-		return;
+
+	aux2 = (No *)malloc(sizeof(No));
+	aux2->info = v;
+	aux2->prox = NULL;
+	if (p > 0 && p < l->tam)
+    {
+		for (i=0; i<p-1; i++)
+            aux = aux->prox;
+
+		aux2->prox = aux->prox;
+		aux->prox = aux2;
 	}
-	if (l->fim == TAM_MAX) { //DESL. ESQUERDA
-		for(i=l->ini-1; i<(l->ini+p); i++) {
-			l->itens[i] = l->itens[i+1];
+	else
+    {
+		if (p == 0)
+		{
+			aux2->prox = l->ini;
+			l->ini = aux2;
 		}
-		l->itens[i] = v;
-		l->ini--;
-	} else { //DESL. DIREITA
-		for(i=l->fim; i>(l->ini+p); i--) {
-			l->itens[i] = l->itens[i-1];
+		if (p == l->tam)
+		{
+			if (l->fim != NULL)
+				l->fim->prox = aux2;
+
+            l->fim = aux2;
 		}
-		l->itens[i] = v;
-		l->fim++;
 	}
+
+	l->tam++;
 }
 
-void inserir_primeiro(Lista * l, int v) {
+void inserir_primeiro(Lista * l, int v)
+{
 	inserir_pos(l, 0, v);
 }
 
-void inserir_ultimo(Lista * l, int v) {
+void inserir_ultimo(Lista * l, int v)
+{
 	inserir_pos(l, tamanho(l), v);
 }
 
-int remover_pos(Lista * l, int p) {
+int remover_pos(Lista * l, int p)
+{
 	int i, v;
-	if (p < 0 || p >= tamanho(l)) {
+	No * aux = l->ini, * aux2;
+
+	if (p < 0 || p >= tamanho(l))
+    {
 		printf("Posicao invalida!\n");
 		return;
 	}
-	v = l->itens[l->ini+p];
-	for(i=l->ini+p; i<l->fim; i++) {
-		l->itens[i] = l->itens[i+1];
+	if (p > 0)
+	{
+		for (i=0; i<p-1; i++)
+			aux = aux->prox;
+
+		aux2 = aux->prox;
+		aux->prox = aux2->prox;
 	}
-	l->fim--;
+	else
+    {
+		aux = NULL;
+		aux2 = l->ini;
+		l->ini = aux2->prox;
+	}
+	if (p == l->tam-1)
+		l->fim = aux;
+
+	v = aux2->info;
+	free(aux2);
+	l->tam--;
+
 	return v;
 }
 
-int remover_primeiro(Lista * l) {
+int remover_primeiro(Lista * l)
+{
 	return remover_pos(l, 0);
 }
 
-int remover_ultimo(Lista * l) {
+int remover_ultimo(Lista * l)
+{
 	return remover_pos(l, tamanho(l)-1);
 }
-
-void remover(Lista * l, int v) {
-	int p = buscar(l, v);
-	if (p != -1) {
-		remover_pos(l, p);
-	}
-}
-
-void remover_todos(Lista *l, int v) {
-    int i,j;
-    for (i=l->ini; i<l->fim; i++) {
-		if (l->itens[i] == v) {
-            for (j=i; j<l->fim; j++) {
-                l->itens[j] = l->itens[j+1];
-            }
-            l->fim--;
-		}
-	}
-}
-
-
-
-
-
-

@@ -114,11 +114,17 @@ void menu(Lista *base, int *expoente, Lista *resultado) //funcionando perfeitame
 Lista * numero_para_lista(int n) // funcionando perfeitamente
 {
     Lista *resultado = criar();
-    while(n>0)
+    if(n == 0)
+        inserir_primeiro(resultado,0);
+    else
     {
-        inserir_primeiro(resultado,n%10);
-        n = n/10;
+        while(n>0)
+        {
+            inserir_primeiro(resultado,n%10);
+            n = n/10;
+        }
     }
+
     return resultado;
 }
 
