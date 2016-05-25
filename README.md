@@ -13,7 +13,7 @@ Ex: Base: 1024 e Expoente:256
 
 Calculadora Comum:
 Resultado: 4,3330021027492677930123572299513e+770
-(Não há consistencia/exatidão no resultado)
+(Não há consistência/exatidão no resultado)
 
 "Smart Calculator":
 Resultado: [ 4 3 3 3 0 0 2 1 0 2 7 4 9 2 6 7 7 9 3 0 1 2 3 5 7 2 2 9 9 5 1 3 0 5
