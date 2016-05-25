@@ -1,33 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Lista.h"
-#include "Trabalho.h"
+#include "Exponenciacao.h"
 
 int main()
 {
-	Lista * numero;
-    Lista * resultado;
-    int num;
-    int pot;
+    Lista *base;
+    Lista *resultado;
+    int *expoente = (int*) malloc(sizeof(int));
+    *expoente = -1;
 
-    printf("Escolha seu numero e potencia, respectivamente. \n");
-    printf("Ex: '101 31', onde 101 equivale ao numero e 31 equivale a potencia. \n");
-
-    scanf("%d %d", &num, &pot);
-
-    numero = numero_para_lista(num);
-
-    resultado = potenciacao(numero, pot);
-
-	printf("Numero: ");
-	imprimir(numero);
-	printf("\nPotencia: ");
-	printf("%d \n",pot);
-	printf("\nResultado: ");
-	imprimir(resultado);
-
-	destruir(numero);
-	destruir(resultado);
+    menu(base, expoente, resultado);
 
 	return 0;
 }

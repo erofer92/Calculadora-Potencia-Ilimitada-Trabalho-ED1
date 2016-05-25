@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "Lista.h"
 
-#define TAM_MAX 100
+#define TAM_MAX 10000
 
 struct lista {
 	int itens[TAM_MAX];
