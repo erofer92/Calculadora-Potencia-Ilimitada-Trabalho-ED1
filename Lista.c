@@ -38,7 +38,7 @@ void inverter(Lista *l)
 }
 
 
-Lista * criar()
+Lista * criar(void)
 {
 	Lista * l = (Lista *)malloc(sizeof(Lista));
 	l->ini = NULL;

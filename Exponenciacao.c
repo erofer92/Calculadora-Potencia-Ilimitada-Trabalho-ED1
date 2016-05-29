@@ -27,7 +27,7 @@ void welcome(char *ch) //funcionando perfeitamente
 }
 
 //case 1
-Lista* definirBase() //funcionando perfeitamente
+Lista* definirBase(void) //funcionando perfeitamente
 {
 	Lista *base;
 	int num;
@@ -48,7 +48,7 @@ Lista* definirBase() //funcionando perfeitamente
 }
 
 //case 2
-int definirExpoente() //funcionando perfeitamente
+int definirExpoente(void) //funcionando perfeitamente
 {
 	int expoente;
 	printf("\n");

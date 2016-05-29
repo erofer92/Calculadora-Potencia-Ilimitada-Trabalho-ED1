@@ -3,7 +3,7 @@
 #include "Lista.h"
 #include "Exponenciacao.h"
 
-int main()
+int main(void)
 {
 	Lista *base;
 	Lista *resultado;

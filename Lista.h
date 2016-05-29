@@ -3,7 +3,7 @@
 
 typedef struct lista Lista;
 
-Lista * criar();
+Lista * criar(void);
 void destruir(Lista * l);
 void limpar(Lista * l);
 void imprimir(Lista * l);

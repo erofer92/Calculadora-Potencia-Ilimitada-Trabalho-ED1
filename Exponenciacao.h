@@ -3,8 +3,8 @@
 
 void menu(Lista *base, int *expoente, Lista *resultado);
 void welcome(char *ch);
-Lista* definirBase();
-int definirExpoente();
+Lista* definirBase(void);
+int definirExpoente(void);
 void executarPotenciacao(Lista *base, int *expoente, Lista *resultado);
 Lista* numero_para_lista(int n);
 Lista* somar(Lista *operando1, Lista *operando2);
