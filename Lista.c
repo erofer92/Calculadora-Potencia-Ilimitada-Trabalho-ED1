@@ -210,7 +210,7 @@ int remover_pos(Lista * l, int p)
 	if (p < 0 || p >= tamanho(l))
 	{
 		printf("Posicao invalida!\n");
-		return;
+		return -1;
 	}
 	if (p > 0)
 	{
