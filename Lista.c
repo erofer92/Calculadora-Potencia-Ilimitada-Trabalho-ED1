@@ -24,7 +24,7 @@ void inverter(Lista *l)
 	No* aux2 = NULL;
 	l->fim = l->ini;
 
-	if(tam = 0)
+	if(tam == 0)
 		return;
 
 	for(i=0; i<tam-1; i++)
