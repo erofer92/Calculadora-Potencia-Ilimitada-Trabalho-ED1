@@ -1,3 +1,6 @@
+#ifndef _LISTA_H
+#define _LISTA_H
+
 typedef struct lista Lista;
 
 Lista * criar();
@@ -21,4 +24,4 @@ int remover_primeiro(Lista * l);
 int remover_ultimo(Lista * l);
 void remover(Lista * l, int v);
 
-
+#endif /* _LISTA_H */
