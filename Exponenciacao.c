@@ -96,7 +96,7 @@ void executarPotenciacao(Lista *base, int *expoente, Lista *resultado)
 	imprimir(resultado);
 
 	printf("\nPara calcular uma nova potencia, pressione qualquer tecla.\n");
-	getch();
+	getchar();
 }
 
 void menu(Lista *base, int *expoente, Lista *resultado) //funcionando perfeitamente
