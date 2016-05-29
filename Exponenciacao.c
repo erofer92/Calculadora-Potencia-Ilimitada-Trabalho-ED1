@@ -3,6 +3,8 @@
 
 #ifdef _WIN32
 #include <conio.h>
+#else
+#include <unistd.h>
 #endif
 
 #include "Lista.h"
@@ -20,7 +22,11 @@ void welcome(char *ch) //funcionando perfeitamente
 		"\nEste programa foi desenvolvido por Eron Fernandes e Jefferson Santos. \n"
 	);
 
-	*ch = getchar();
+#ifdef _WIN32
+	*ch = getch();
+#else
+	scanf("%c", ch);
+#endif
 
 	while(*ch != '1' && *ch != '2' && *ch != '3' && *ch != '4')
 	{
@@ -28,7 +34,11 @@ void welcome(char *ch) //funcionando perfeitamente
 		fflush(stdin);
 #endif
 		printf("\nSelecione uma opcao valida: ");
-		*ch = getchar();
+#ifdef _WIN32
+		*ch = getch();
+#else
+		scanf("%c", ch);
+#endif
 	}
 }
 
@@ -94,8 +104,17 @@ void executarPotenciacao(Lista *base, int *expoente, Lista *resultado)
 	printf("\nResultado: ");
 	imprimir(resultado);
 
+#ifdef _WIN32
 	printf("\nPara calcular uma nova potencia, pressione qualquer tecla.\n");
-	getchar();
+	getch();
+#else
+	printf(
+		"\nPara calcular uma nova potencia, pressione Enter(e aguarde 3 segundos).\n"
+		"(Ou no caso de haver algo em stdin, aguarde 3 segundos...)\n"
+	);
+	do { getchar(); } while (getchar() != '\n');
+	sleep(3);
+#endif
 }
 
 void menu(Lista *base, int *expoente, Lista *resultado) //funcionando perfeitamente
