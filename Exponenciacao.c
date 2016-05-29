@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+
+#ifdef _WIN32
 #include <conio.h>
+#endif
+
 #include "Lista.h"
 #include "Exponenciacao.h"
 
@@ -16,13 +20,15 @@ void welcome(char *ch) //funcionando perfeitamente
 		"\nEste programa foi desenvolvido por Eron Fernandes e Jefferson Santos. \n"
 	);
 
-	*ch = getch();
+	*ch = getchar();
 
 	while(*ch != '1' && *ch != '2' && *ch != '3' && *ch != '4')
 	{
+#ifdef _WIN32
 		fflush(stdin);
+#endif
 		printf("\nSelecione uma opcao valida: ");
-		*ch = getch();
+		*ch = getchar();
 	}
 }
 
@@ -31,11 +37,15 @@ Lista* definirBase(void) //funcionando perfeitamente
 {
 	Lista *base;
 	int num;
+
 	printf("\nEscolha o valor da Base: \n");
 	scanf("%d", &num);
+
 	while(num < 0)
 	{
+#ifdef _WIN32
 		fflush(stdin);
+#endif
 		printf(
 			"\n\tWARNING!\n"
 			"A Base deve ter um valor positivo.\n"
@@ -57,7 +67,9 @@ int definirExpoente(void) //funcionando perfeitamente
 
 	while(expoente < 0)
 	{
+#ifdef _WIN32
 		fflush(stdin);
+#endif
 		printf(
 			"\n\tWARNING!\n"
 			"O Expoente deve ter um valor positivo.\n"
@@ -111,7 +123,11 @@ void menu(Lista *base, int *expoente, Lista *resultado) //funcionando perfeitame
 			printf("Menu Switch Error\n");
 			break;
 	}
+#ifdef _WIN32
 	system("cls");
+#else
+	system("clear");
+#endif
 	menu(base, expoente, resultado);
 }
 
