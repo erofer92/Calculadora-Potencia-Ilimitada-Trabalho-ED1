@@ -61,8 +61,7 @@ Lista* definirBase(void) //funcionando perfeitamente
 int definirExpoente(void) //funcionando perfeitamente
 {
 	int expoente;
-	printf("\n");
-	printf("Escolha o valor do Expoente: \n");
+	printf("\nEscolha o valor do Expoente: \n");
 	scanf("%d", &expoente);
 
 	while(expoente < 0)
