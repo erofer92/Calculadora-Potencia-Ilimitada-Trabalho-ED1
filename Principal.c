@@ -5,12 +5,12 @@
 
 int main()
 {
-    Lista *base;
-    Lista *resultado;
-    int *expoente = (int*) malloc(sizeof(int));
-    *expoente = -1;
+	Lista *base;
+	Lista *resultado;
+	int *expoente = (int*) malloc(sizeof(int));
+	*expoente = -1;
 
-    menu(base, expoente, resultado);
+	menu(base, expoente, resultado);
 
 	return 0;
 }

@@ -19,22 +19,22 @@ struct no
 
 void inverter(Lista *l)
 {
-    int i, tam = tamanho(l);
-    No* aux;
-    No* aux2 = NULL;
-    l->fim = l->ini;
+	int i, tam = tamanho(l);
+	No* aux;
+	No* aux2 = NULL;
+	l->fim = l->ini;
 
-    if(tam = 0)
-        return;
+	if(tam = 0)
+		return;
 
-    for(i=0; i<tam-1; i++)
-    {
-        aux = l->ini;
-        l->ini = aux->prox;
-        aux->prox = aux2;
-        aux2 = aux;
-    }
-    l->ini->prox = aux;
+	for(i=0; i<tam-1; i++)
+	{
+		aux = l->ini;
+		l->ini = aux->prox;
+		aux->prox = aux2;
+		aux2 = aux;
+	}
+	l->ini->prox = aux;
 }
 
 
@@ -59,7 +59,7 @@ void limpar(Lista * l)
 {
 	No * aux = l->ini;
 	while (aux != NULL)
-    {
+	{
 		No * aux2 = aux;
 		aux = aux->prox;
 		free(aux2);
@@ -74,7 +74,7 @@ void imprimir(Lista * l)
 	No * aux = l->ini;
 	printf("[ ");
 	while (aux != NULL)
-    {
+	{
 		printf("%d ", aux->info);
 		aux = aux->prox;
 	}
@@ -96,7 +96,7 @@ int ler_pos(Lista * l, int p)
 	int i;
 	No * aux = l->ini;
 	if (p < 0 || p >= tamanho(l))
-    {
+	{
 		printf("Posicao invalida!\n");
 		return -1;
 	}
@@ -120,15 +120,15 @@ int buscar(Lista * l, int v)
 {
 	int p = 0;
 	No * aux = l->ini;
-/*
-	for (i=0; i<tamanho(l); i++) {
-		if (ler_pos(l,i) == v) {
-			return i;
-		}
-	}
-*/
+	/*
+	   for (i=0; i<tamanho(l); i++) {
+	   if (ler_pos(l,i) == v) {
+	   return i;
+	   }
+	   }
+	 */
 	while (aux != NULL && aux->info != v)
-    {
+	{
 		aux = aux->prox;
 		p++;
 	}
@@ -141,7 +141,7 @@ void escrever_pos(Lista * l, int p, int v)
 	int i;
 	No * aux = l->ini;
 	if (p < 0 || p >= tamanho(l))
-    {
+	{
 		printf("Posicao invalida!\n");
 		return;
 	}
@@ -157,7 +157,7 @@ void inserir_pos(Lista * l, int p, int v)
 	No * aux = l->ini, * aux2;
 
 	if (p < 0 || p > tamanho(l))
-    {
+	{
 		printf("Posicao invalida!\n");
 		return;
 	}
@@ -166,15 +166,15 @@ void inserir_pos(Lista * l, int p, int v)
 	aux2->info = v;
 	aux2->prox = NULL;
 	if (p > 0 && p < l->tam)
-    {
+	{
 		for (i=0; i<p-1; i++)
-            aux = aux->prox;
+			aux = aux->prox;
 
 		aux2->prox = aux->prox;
 		aux->prox = aux2;
 	}
 	else
-    {
+	{
 		if (p == 0)
 		{
 			aux2->prox = l->ini;
@@ -185,7 +185,7 @@ void inserir_pos(Lista * l, int p, int v)
 			if (l->fim != NULL)
 				l->fim->prox = aux2;
 
-            l->fim = aux2;
+			l->fim = aux2;
 		}
 	}
 
@@ -208,7 +208,7 @@ int remover_pos(Lista * l, int p)
 	No * aux = l->ini, * aux2;
 
 	if (p < 0 || p >= tamanho(l))
-    {
+	{
 		printf("Posicao invalida!\n");
 		return;
 	}
@@ -221,7 +221,7 @@ int remover_pos(Lista * l, int p)
 		aux->prox = aux2->prox;
 	}
 	else
-    {
+	{
 		aux = NULL;
 		aux2 = l->ini;
 		l->ini = aux2->prox;
