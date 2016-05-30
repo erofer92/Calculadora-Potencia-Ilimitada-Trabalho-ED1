@@ -3,14 +3,14 @@
 #include "Lista.h"
 #include "Exponenciacao.h"
 
-int main()
+int main(void)
 {
-    Lista *base;
-    Lista *resultado;
-    int *expoente = (int*) malloc(sizeof(int));
-    *expoente = -1;
+	Lista *base;
+	Lista *resultado;
+	int *expoente = (int*) malloc(sizeof(int));
+	*expoente = -1;
 
-    menu(base, expoente, resultado);
+	menu(base, expoente, resultado);
 
 	return 0;
 }
